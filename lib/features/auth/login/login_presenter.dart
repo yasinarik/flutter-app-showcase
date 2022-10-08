@@ -29,6 +29,10 @@ class LoginPresenter extends Cubit<LoginViewModel> {
   }
 
   Future<void> onTapLogin() async {
+    if (_model.isBusy) {
+      return;
+    }
+    
     await (await usecaseLogin
             .execute(
               username: _model.username,
