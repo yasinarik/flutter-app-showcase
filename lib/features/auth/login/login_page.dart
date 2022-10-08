@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginVie
               stateObserver(
                 builder: (context, state) {
                   return ElevatedButton(
-                    onPressed: state.areFieldsFilled ? presenter.onTapLogin : null,
+                    onPressed: state.isLoginEnabled ? presenter.onTapLogin : null,
                     child: buildButtonChild(),
                   );
                 },

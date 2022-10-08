@@ -28,7 +28,7 @@ class LoginPresentationModel implements LoginViewModel {
   late final FutureResult<Either<LogInFailure, User>> loginResult;
 
   @override
-  bool get areFieldsFilled {
+  bool get isLoginEnabled {
     return username.isNotEmpty && password.isNotEmpty;
   }
 
@@ -52,6 +52,6 @@ class LoginPresentationModel implements LoginViewModel {
 
 /// Interface to expose fields used by the view (page).
 abstract class LoginViewModel {
-  bool get areFieldsFilled;
+  bool get isLoginEnabled;
   bool get isBusy;
 }
