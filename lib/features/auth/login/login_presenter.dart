@@ -14,11 +14,11 @@ class LoginPresenter extends Cubit<LoginViewModel> {
   LoginPresentationModel get _model => state as LoginPresentationModel;
 
   void onChangedUsername({required String text}) {
-    // TODO
+    emit(_model.copyWith(username: text));
   }
 
   void onChangedPassword({required String text}) {
-    // TODO
+    emit(_model.copyWith(password: text));
   }
 
   Future<void> onTapLogin() async {
