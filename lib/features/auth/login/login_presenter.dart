@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter_demo/core/utils/bloc_extensions.dart';
 import 'package:flutter_demo/core/utils/either_extensions.dart';
