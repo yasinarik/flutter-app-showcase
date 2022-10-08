@@ -21,7 +21,7 @@ Future<void> main() async {
   late AppInitPresenter presenter;
   late AppInitNavigator navigator;
 
-  void _initMvp() {
+  void initMvp() {
     initParams = const AppInitInitialParams();
     model = AppInitPresentationModel.initial(
       initParams,
@@ -39,14 +39,14 @@ Future<void> main() async {
   await screenshotTest(
     "app_init_page",
     setUp: () async {
-      _initMvp();
+      initMvp();
       when(() => AppInitMocks.appInitUseCase.execute()).thenAnswer((_) => successFuture(unit));
     },
     pageBuilder: () => page,
   );
 
   test("getIt page resolves successfully", () async {
-    _initMvp();
+    initMvp();
     final page = getIt<AppInitPage>(param1: initParams);
     expect(page.presenter, isNotNull);
     expect(page, isNotNull);

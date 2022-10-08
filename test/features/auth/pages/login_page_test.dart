@@ -1,4 +1,6 @@
+import 'package:flutter_demo/core/domain/stores/user_store.dart';
 import 'package:flutter_demo/dependency_injection/app_component.dart';
+import 'package:flutter_demo/features/auth/domain/use_cases/log_in_use_case.dart';
 import 'package:flutter_demo/features/auth/login/login_initial_params.dart';
 import 'package:flutter_demo/features/auth/login/login_navigator.dart';
 import 'package:flutter_demo/features/auth/login/login_page.dart';
@@ -15,16 +17,23 @@ Future<void> main() async {
   late LoginPresentationModel model;
   late LoginPresenter presenter;
   late LoginNavigator navigator;
+  late UserStore userStore;
+  late LogInUseCase usecaseLogin;
 
-  void _initMvp() {
+  void initMvp() {
     initParams = const LoginInitialParams();
     model = LoginPresentationModel.initial(
       initParams,
     );
+    
     navigator = LoginNavigator(Mocks.appNavigator);
+    userStore = UserStore();
+    usecaseLogin = LogInUseCase(userStore);
+
     presenter = LoginPresenter(
       model,
       navigator,
+      usecaseLogin,
     );
     page = LoginPage(presenter: presenter);
   }
@@ -32,13 +41,13 @@ Future<void> main() async {
   await screenshotTest(
     "login_page",
     setUp: () async {
-      _initMvp();
+      initMvp();
     },
     pageBuilder: () => page,
   );
 
   test("getIt page resolves successfully", () async {
-    _initMvp();
+    initMvp();
     final page = getIt<LoginPage>(param1: initParams);
     expect(page.presenter, isNotNull);
     expect(page, isNotNull);
