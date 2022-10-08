@@ -1,7 +1,6 @@
 // ignore: unused_import
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/core/helpers.dart';
 import 'package:flutter_demo/core/utils/mvp_extensions.dart';
 import 'package:flutter_demo/features/auth/login/login_presentation_model.dart';
 import 'package:flutter_demo/features/auth/login/login_presenter.dart';
@@ -47,7 +46,7 @@ class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginVie
                 builder: (context, state) {
                   return ElevatedButton(
                     onPressed: state.areFieldsFilled ? presenter.onTapLogin : null,
-                    child: Text(appLocalizations.logInAction),
+                    child: buildButtonChild(),
                   );
                 },
               ),
@@ -55,4 +54,24 @@ class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginVie
           ),
         ),
       );
+
+  Widget buildButtonChild() {
+    late Widget buttonChild;
+    // ignore: prefer-conditional-expressions
+    if (state.isBusy) {
+      buttonChild = const SizedBox(
+        width: 16,
+        height: 16,
+        child: CircularProgressIndicator(
+          color: Colors.white,
+          strokeWidth: 2,
+        ),
+      );
+    } else {
+      buttonChild = Text(appLocalizations.logInAction);
+    }
+    return Center(
+      child: buttonChild,
+    );
+  }
 }
