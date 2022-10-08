@@ -6,13 +6,28 @@ class LoginPresentationModel implements LoginViewModel {
   LoginPresentationModel.initial(
     // ignore: avoid_unused_constructor_parameters
     LoginInitialParams initialParams,
-  );
+  ) {
+    username = '';
+    password = '';
+  }
 
   /// Used for the copyWith method
-  LoginPresentationModel._();
+  LoginPresentationModel._({
+    required this.username,
+    required this.password,
+  });
 
-  LoginPresentationModel copyWith() {
-    return LoginPresentationModel._();
+  late final String username;
+  late final String password;
+
+  LoginPresentationModel copyWith({
+    String? username,
+    String? password,
+  }) {
+    return LoginPresentationModel._(
+      username: username ?? this.username,
+      password: password ?? this.password,
+    );
   }
 }
 
