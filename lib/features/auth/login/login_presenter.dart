@@ -12,4 +12,16 @@ class LoginPresenter extends Cubit<LoginViewModel> {
 
   // ignore: unused_element
   LoginPresentationModel get _model => state as LoginPresentationModel;
+
+  void onChangedUsername({required String text}) {
+    // TODO
+  }
+
+  void onChangedPassword({required String text}) {
+    // TODO
+  }
+
+  Future<void> onTapLogin() async {
+    // TODO
+  }
 }
