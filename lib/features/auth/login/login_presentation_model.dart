@@ -20,6 +20,17 @@ class LoginPresentationModel implements LoginViewModel {
   late final String username;
   late final String password;
 
+  @override
+  bool get areFieldsFilled {
+    return username.isNotEmpty && password.isNotEmpty;
+  }
+
+  @override
+  bool get isBusy {
+    // TODO
+    return false;
+  }
+
   LoginPresentationModel copyWith({
     String? username,
     String? password,
@@ -32,4 +43,7 @@ class LoginPresentationModel implements LoginViewModel {
 }
 
 /// Interface to expose fields used by the view (page).
-abstract class LoginViewModel {}
+abstract class LoginViewModel {
+  bool get areFieldsFilled;
+  bool get isBusy;
+}
