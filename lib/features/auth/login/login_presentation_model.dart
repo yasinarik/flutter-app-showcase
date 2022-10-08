@@ -34,8 +34,7 @@ class LoginPresentationModel implements LoginViewModel {
 
   @override
   bool get isBusy {
-    // TODO
-    return false;
+    return loginResult.isPending();
   }
 
   LoginPresentationModel copyWith({
