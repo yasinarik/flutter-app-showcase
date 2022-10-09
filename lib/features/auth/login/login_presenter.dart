@@ -30,7 +30,7 @@ class LoginPresenter extends Cubit<LoginViewModel> {
     if (_model.isBusy) {
       return;
     }
-    
+
     await (await usecaseLogin
             .execute(
               username: _model.username,
