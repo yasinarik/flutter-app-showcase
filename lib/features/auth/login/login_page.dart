@@ -1,7 +1,6 @@
 // ignore: unused_import
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/core/helpers.dart';
 import 'package:flutter_demo/core/utils/mvp_extensions.dart';
 import 'package:flutter_demo/features/auth/login/login_presentation_model.dart';
 import 'package:flutter_demo/features/auth/login/login_presenter.dart';
@@ -32,7 +31,7 @@ class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginVie
                 decoration: InputDecoration(
                   hintText: appLocalizations.usernameHint,
                 ),
-                onChanged: (text) => doNothing(), //TODO
+                onChanged: (text) => presenter.onChangedUsername(text: text),
               ),
               const SizedBox(height: 8),
               TextField(
@@ -40,17 +39,39 @@ class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginVie
                 decoration: InputDecoration(
                   hintText: appLocalizations.passwordHint,
                 ),
-                onChanged: (text) => doNothing(), //TODO
+                onChanged: (text) => presenter.onChangedPassword(text: text),
               ),
               const SizedBox(height: 16),
               stateObserver(
-                builder: (context, state) => ElevatedButton(
-                  onPressed: () => doNothing(), //TODO
-                  child: Text(appLocalizations.logInAction),
-                ),
+                builder: (context, state) {
+                  return ElevatedButton(
+                    onPressed: state.isLoginEnabled ? presenter.onTapLogin : null,
+                    child: buildButtonChild(),
+                  );
+                },
               ),
             ],
           ),
         ),
       );
+
+  Widget buildButtonChild() {
+    late Widget buttonChild;
+    // ignore: prefer-conditional-expressions
+    if (state.isBusy) {
+      buttonChild = const SizedBox(
+        width: 16,
+        height: 16,
+        child: CircularProgressIndicator(
+          color: Colors.white,
+          strokeWidth: 2,
+        ),
+      );
+    } else {
+      buttonChild = Text(appLocalizations.logInAction);
+    }
+    return Center(
+      child: buttonChild,
+    );
+  }
 }

@@ -5,7 +5,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=2.17.0 <3.3.4"
 
 dependencies:
   flutter:
@@ -50,7 +50,7 @@ dev_dependencies:
 
   # tests
   golden_toolkit: 0.13.0
-  alchemist: 0.4.1
+  alchemist: 0.5.0
   mocktail_image_network: 0.3.1
   mocktail: 0.3.0
   bloc_test: 9.0.3
